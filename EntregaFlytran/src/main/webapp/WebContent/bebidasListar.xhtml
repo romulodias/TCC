@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_modelo1.xhtml">
+	<ui:define name="titulo">#{msgs.tituloListaBeb}</ui:define>
+	<ui:define name="conteudo">
+
+<h:outputText value="#{msgs.sejaBemVindo} #{loginMB.login}"></h:outputText>
+	
+		<center> <h1> <h:outputText value="#{msgs.listaBebidas}"></h:outputText> </h1> </center>
+
+		<center> 
+		<h:panelGrid columns="6" layout="grid">	
+			<h:commandButton value="#{msgs.btnNovaBebida}" action="#{manterBebidaMB.abrirInclusao}"></h:commandButton>
+			
+			<h:outputLabel value="#{msgs.campoPesquisa}" for="nome"></h:outputLabel>
+			<h:inputText id="nome" value="#{manterBebidaMB.filtroNomeBebida}" size="15" maxlength="100"></h:inputText>
+			
+			<h:commandButton ajax="false" value="#{msgs.btnPesquisar}"
+				action="#{manterBebidaMB.PesquisarNomeBebida}">
+				<f:ajax execute="nome" render="tabela" />
+			</h:commandButton>
+		</h:panelGrid> 
+		
+		<h:dataTable id="tabela" border="3" cellspacing="0" cellpadding="3"
+			var="bebida" value="#{manterBebidaMB.bebidas}" rowHover="true">
+
+			<h:column>
+				<f:facet name="header">#{msgs.codBeb}</f:facet>
+				<h:outputText value="#{bebida.idBebida}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">#{msgs.bebNome}</f:facet>
+				<h:outputText value="#{bebida.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">#{msgs.bebTipo}</f:facet>
+				<h:outputText value="#{bebida.tipo}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">#{msgs.bebPreco}</f:facet>
+				<h:outputText value="#{bebida.preco}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">#{msgs.acoesBeb}</f:facet>
+
+				<h:panelGroup>
+					<h:commandButton ajax="false" id="btnEditar" value="#{msgs.btnEditarBeb}"
+						action="#{manterBebidaMB.editarBebida}" >
+						<f:param name="idBebida" value="#{bebida.idBebida}"></f:param>
+					</h:commandButton>
+						-
+						<h:commandButton ajax="false" type="push" id="btnExcluir"
+						action="#{manterBebidaMB.excluirBebida}" immediate="true"
+						value="#{msgs.btnExcluirBeb}">
+						<f:param name="idBebida" value="#{bebida.idBebida}" />
+					</h:commandButton>
+				</h:panelGroup>
+
+			</h:column>
+
+		</h:dataTable> </center>
+
+	</ui:define>
+
+</ui:composition>
+</html>

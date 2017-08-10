@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_modelo2.xhtml">
+	<ui:define name="titulo">#{msgs.tituloCadastroBeb}</ui:define>
+	<ui:define name="conteudo">
+	
+			
+			<h:outputText value="#{manterBebidaMB.bebida.idBebida}" required="true" ></h:outputText>
+	
+	<center>
+		<h1><h:outputLabel value="#{msgs.cadastroBeb}"></h:outputLabel></h1>
+		
+		<h:messages style="color: red"></h:messages>
+			<h:inputHidden value="#{manterBebidaMB.bebida.idBebida}" />	
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{msgs.codBebida} " for="idBebida"></h:outputLabel>
+			<h:outputText id="idBebida" value="#{manterBebidaMB.bebida.idBebida}"></h:outputText>
+			
+			<h:outputLabel value="#{msgs.nomeBebida} " for="nome"></h:outputLabel>
+			<h:inputText size="40" maxlength="40" id="nome" value="#{manterBebidaMB.bebida.nome}"
+				required="true" requiredMessage="#{nomeBebObrigatorio}"></h:inputText>
+
+			<h:outputLabel value="#{msgs.tipoBebida} " for="tipo"></h:outputLabel>
+			<h:inputText id="tipo" value="#{manterBebidaMB.bebida.tipo}"
+				required="true" size="40" maxlength="40"
+				requiredMessage="#{msgs.tipoBebObrigatoria}"></h:inputText>
+
+			<h:outputLabel value="#{msgs.precoBebida} " for="preco"></h:outputLabel>
+			<h:inputText id="preco" value="#{manterBebidaMB.bebida.preco}" required="true" size="12" maxlength="12"
+				requiredMessage="#{msgs.precoBebObrigatorio}">
+				<f:convertNumber minFractionDigits="2" pattern="0.00" />
+			</h:inputText>
+		
+		<f:facet name="footer">
+			<h:panelGroup>
+				<h:commandButton ajax="false" immediate="true" value="#{msgs.cancelarCadastroBeb}"	action="#{manterBebidaMB.cancelar}"></h:commandButton>
+				 - 
+				<h:commandButton ajax="false" value="#{msgs.salvarCadastroBeb}" action="#{manterBebidaMB.salvarBebida}"></h:commandButton>
+			</h:panelGroup>
+		</f:facet>
+		
+		</h:panelGrid>
+	</center>
+	</ui:define>
+
+</ui:composition>
+</html>

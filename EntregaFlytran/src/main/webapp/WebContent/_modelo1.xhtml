@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title><ui:insert name="titulo">Título</ui:insert></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</h:head>
+<h:body>
+	
+	<h:form>
+	
+		<div>
+			<center><h:graphicImage alt="Logotipo Pizzaria"
+			url="img/header_pizzaria.jpg"></h:graphicImage></center>
+		</div>
+		
+		<center>
+		<h:commandButton value="#{msgs.inicio}" action="#{menuMB.escolherMenuHome}"/>
+		-
+		<h:commandButton value="#{msgs.bebidas}" action="#{manterBebidaMB.listarBebida}"/>
+		-
+		<h:commandButton value="#{msgs.pizzas}" action="#{manterPizzaMB.listarPizza}"/>
+		-
+		<h:commandButton value="#{msgs.sair}" action="#{menuMB.escolherMenuSair}"/>
+		</center>
+				
+		<ui:insert name="cabecalho"></ui:insert>
+		<ui:insert name="conteudo"></ui:insert>
+	
+	</h:form>
+</h:body>
+</html>

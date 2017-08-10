@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_modelo1.xhtml">
+
+	<ui:define name="titulo">#{msgs.tituloListaPiz}</ui:define>
+	<ui:define name="conteudo">
+	
+	<h:outputText value="#{msgs.sejaBemVindo} #{loginMB.login}"></h:outputText>
+
+		<center><h1><h:outputText value="#{msgs.tituloListaPiz}"></h:outputText></h1></center>
+		
+		<center>
+			<h:panelGrid columns="6" layout="grid">
+				<h:commandButton value="#{msgs.btnNovaPizza}" action="#{manterPizzaMB.abrirInclusao}"></h:commandButton>
+		------------------------
+			<h:outputLabel value="#{msgs.pesquisaSabor}" for="sabor"></h:outputLabel>
+				<h:inputText id="sabor"	value="#{manterPizzaMB.filtroSaborPizza}" size="15" maxlength="100"></h:inputText>
+				
+				<h:commandButton ajax="false" value="#{msgs.btnPesquisar}"
+					action="#{manterPizzaMB.pesquisarPizzas}">
+					<f:ajax execute="sabor" render="tabela" />
+				</h:commandButton>
+			
+			</h:panelGrid>
+			
+			<h:dataTable id="tabela" border="3" cellspacing="0" cellpadding="3" 
+			var="pizza"	value="#{manterPizzaMB.pizzas}" rowHover="true">
+
+				<h:column>
+					<f:facet name="header">#{msgs.codPizza}</f:facet>
+					<h:outputText value="#{pizza.idPizza}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msgs.tamanhoPizza}</f:facet>
+					<h:outputText value="#{pizza.tamanho}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msgs.saborPizza}</f:facet>
+					<h:outputText value="#{pizza.sabor}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msgs.precoPizza}</f:facet>
+					<h:outputText value="#{pizza.preco}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msgs.descricaoPizza}</f:facet>
+					<h:outputText value="#{pizza.descricao}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msgs.acoesPizza}</f:facet>
+
+					<h:panelGroup>
+						<h:commandButton ajax="false" id="btnEditar" 
+						action="#{manterPizzaMB.editarPizza}" value="#{msgs.btnEditarPizza}">
+							<f:param name="idPizza" value="#{pizza.idPizza}"></f:param>
+						</h:commandButton>
+						-
+						<h:commandButton ajax="false" type="push" id="btnExcluir" 
+						value="#{msgs.btnExcluirPizza}" action="#{manterPizzaMB.excluirPizza}" immediate="true">
+							<f:param name="idPizza" value="#{pizza.idPizza}"></f:param>
+						</h:commandButton>
+					</h:panelGroup>
+
+				</h:column>
+
+			</h:dataTable>
+
+		</center>
+	</ui:define>
+
+</ui:composition>
+</html>

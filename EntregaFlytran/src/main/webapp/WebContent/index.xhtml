@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:composition template="_modelo.xhtml">
+	<ui:define name="titulo">#{msgs.tituloAutenticacao}</ui:define>
+	<ui:define name="conteudo">
+		
+		<h:messages style="color: red"></h:messages>
+		<h1><h:outputLabel value="#{msgs.bemVindo}"></h:outputLabel></h1>
+		<h2><h:outputLabel value="#{msgs.facaOlogin} "></h:outputLabel></h2>
+				
+		<h:panelGrid columns="2">
+		
+			<h:outputLabel value="#{msgs.campoUsuario}" for="login"></h:outputLabel>
+			<h:panelGroup>
+				<h:inputText id="login" value="#{loginMB.login}" required="true"
+					requiredMessage="#{msgs.usuarioObrigatorio}"></h:inputText>
+				<h:outputText value=" #{msgs.apenasLetrasEnumero}"></h:outputText>
+			</h:panelGroup>
+			
+			<h:outputLabel value="#{msgs.campoSenha}" for="senha"></h:outputLabel>
+			<h:inputSecret id="senha" value="#{loginMB.senha}" required="true" 
+				requiredMessage="#{msgs.senhaObrigatoria}"></h:inputSecret>
+				
+			<h:outputText value=""></h:outputText>
+			<h:commandButton value="#{msgs.botaoEnviar}" action="#{loginMB.autenticar}"></h:commandButton>
+		
+		</h:panelGrid>
+	
+	</ui:define>
+</ui:composition>
+
+</html>

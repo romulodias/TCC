@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="_modelo2.xhtml">
+	<ui:define name="titulo">#{msgs.tituloCadastroPizza}</ui:define>
+	<ui:define name="conteudo">
+	
+		<h:outputText value="#{manterPizzaMB.pizza.idPizza}" required="true" ></h:outputText>
+	
+	<center>
+		<h1><h:outputLabel value="#{msgs.tituloCadastroPizza}"></h:outputLabel></h1>
+		
+		<h:messages style="color: red"></h:messages>		
+			<h:inputHidden value="#{manterPizzaMB.pizza.idPizza}" />
+		<h:panelGrid columns="2">	
+			<h:outputLabel value="#{msgs.codPizza} " for="idPizza"></h:outputLabel>
+			<h:outputText id="idPizza" value="#{manterPizzaMB.pizza.idPizza}"></h:outputText>
+				
+			<h:outputLabel value="#{msgs.pizzaTamanho} " for="tamanho"></h:outputLabel>
+			<h:inputText size="15" maxlength="15" id="tamanho" value="#{manterPizzaMB.pizza.tamanho}" 
+			required="true" requiredMessage="#{msgs.campoTamanhoObrigatorio}"></h:inputText>
+				
+			<h:outputLabel value="#{msgs.pizzaSabor} " for="sabor"></h:outputLabel>
+			<h:inputText size="15" maxlength="15" id="sabor" value="#{manterPizzaMB.pizza.sabor}" 
+			required="true"	requiredMessage="#{msgs.campoSaborObrigatorio}"></h:inputText>
+				
+			<h:outputLabel value="#{msgs.pizzaPreco} " for="preco"></h:outputLabel>
+			<h:inputText size="15" maxlength="15" id="preco" value="#{manterPizzaMB.pizza.preco}" 
+			required="true"	requiredMessage="#{msgs.campoPrecoObrigatorio}"></h:inputText>	
+			
+			<h:outputLabel value="#{msgs.pizzaDescricao} " for="descricao"></h:outputLabel>
+			<h:inputText size="30" maxlength="50" id="descricao" value="#{manterPizzaMB.pizza.descricao}" 
+			required="true"	requiredMessage="#{msgs.campoDescricaoObrigatorio}"></h:inputText>
+		<f:facet name="footer">
+			<h:panelGroup>
+				<h:commandButton ajax="false" immediate="true" value="#{msgs.btnCancelarCadastroPizza}"	action="#{manterPizzaMB.cancelar}"></h:commandButton>
+				 - 
+				<h:commandButton ajax="false" value="#{msgs.btnSalvarCadastroPizza}" action="#{manterPizzaMB.salvarPizza}"></h:commandButton>
+			</h:panelGroup>
+		</f:facet>
+		</h:panelGrid>
+	</center>
+	</ui:define>
+
+</ui:composition>
+</html>
